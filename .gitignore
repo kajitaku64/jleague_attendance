@@ -1,0 +1,17 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Data / Model
+data/processed/
+models/
+
+# OS
+.DS_Store
+Thumbs.db
+
+git status
