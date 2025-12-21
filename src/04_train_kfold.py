@@ -8,6 +8,7 @@ from sklearn.metrics import mean_squared_error
 # =====================
 train = pd.read_csv("data/raw/train_add.csv")
 test  = pd.read_csv("data/raw/test.csv")
+test_ids = test["id"].copy()   # ★追加：元のtestのidを保存
 
 # =====================
 # stadium merge
@@ -149,6 +150,14 @@ print("\nfeature_importance_mean.csv を outputs/ に保存しました")
 # =====================
 # submission
 # =====================
-sub = pd.DataFrame({"id": test["id"], "y": pred_test})
+# =====================
+# submission
+# =====================
+print("len(test_ids) =", len(test_ids))
+print("len(X_test)   =", len(X_test))
+print("len(pred_test)=", len(pred_test))
+assert len(pred_test) == len(test_ids), "pred_testの長さがtest_idsと一致しません（行が落ちてる可能性）"
+
+sub = pd.DataFrame({"id": test_ids.values, "y": pred_test})
 sub.to_csv("submissions/submission_005.csv", index=False)
 print("submission_005.csv 作成完了")
